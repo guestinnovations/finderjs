@@ -103,7 +103,7 @@ finder.itemSelected = function itemSelected(cfg, emitter, value) {
   } else if (item.url) {
     document.location.href = item.url;
   } else {
-    emitter.emit('leaf-selected', item);
+    emitter.emit('leaf-selected', item, itemEl);
   }
 };
 
