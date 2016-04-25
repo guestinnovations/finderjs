@@ -109,32 +109,30 @@ finder.itemSelected = function itemSelected(cfg, emitter, value) {
     finder.createColumn(data, cfg, emitter, item);
   } else {
 
-    var findItem = function(el) {
+    var canRemove = function(elements, remove) {
       // var item;
-      $.each(el, function() {
-        if (cfg.selected.indexOf(this._item) == -1) {
-          _.removeClass(this, cfg.className.activeParent);
-        } else if (cfg.selected.indexOf(this._item) !== -1) {
-          _.addClass(this, cfg.className.activeParent);
-        } else if ('items' in el._item) {
-          findItem(el._item.items);
+      // $.each(elements, function() {
+      for (var i = 0; i < elements.length; ++i) {
+        if (cfg.selected.indexOf(elements[i]._item) !== -1) {
+          remove = false;
+          return false;
+        } else if ('items' in elements[i]._item) {
+          remove = canRemove(elements[i]._item.items, remove);
         }
-      });
-      // return item;
+      };
+      return remove;
     };
 
     if (_.hasClass(itemEl, cfg.className.selected)) {
       _.removeClass(itemEl, cfg.className.selected);
-      // for (var i = 0; i < allActiveEls.length; ++i) {
-      //   $.each(allActiveEls[i]._item.items, function() {
-      //     if (cfg.selected.indexOf(this) !== -1) {
-      //       _.removeClass(allActiveEls[i], cfg.className.activeParent);
-      //       var index = cfg.parentSelected.indexOf(allActiveEls[i]._item);
-      //       if (index !== -1) cfg.parentSelected.splice(index, 1);
-      //     }
-      //   });
-      // }
-      findItem(allActiveEls);
+
+
+      for (var i = 0; i < activeEls.length; ++i)  {
+        var remove = canRemove(activeEls[i]._item.items, true);
+        if (remove) {
+          _.addClass(activeEls[i], cfg.className.selected);
+        }
+      };
       var index = cfg.selected.indexOf(item);
       if (index !== -1) cfg.selected.splice(index, 1);
       selected = false;
