@@ -64,7 +64,7 @@ function finder(container, data, options) {
     'navigate', finder.navigate.bind(null, cfg, emitter));
 
   _.addClass(container, cfg.className.container);
-  container.innerHTML == '';
+  container.innerHTML = '';
   finder.createColumn(data, cfg, emitter);
   container.setAttribute('tabindex', 0);
 
