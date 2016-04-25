@@ -13,6 +13,7 @@ var _ = require('./util');
 var defaults = {
   labelKey: 'label',
   childKey: 'children',
+  selected: [],
   className: {
     container: 'fjs-container',
     col: 'fjs-col',
@@ -42,7 +43,6 @@ function finder(container, data, options) {
   var cfg = extend(defaults, {
     container: container,
     emitter: emitter,
-    selected: [],
     parentSelected: [],
   }, options);
 
@@ -128,7 +128,7 @@ finder.itemSelected = function itemSelected(cfg, emitter, value) {
       _.removeClass(itemEl, cfg.className.selected);
 
       // if (selectedEls.length === 0) {
-        
+
       // }
 
       // for (var i = 0; i < allActiveEls.length; ++i)  {
