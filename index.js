@@ -111,7 +111,7 @@ finder.itemSelected = function itemSelected(cfg, emitter, value) {
     if (_.hasClass(itemEl, cfg.className.selected)) {
       _.removeClass(itemEl, cfg.className.selected);
       for (var i = 0; i < allActiveEls.length; ++i) {
-        _.removeClass(allActiveEls[i], cfg.className.parentActive);
+        _.removeClass(allActiveEls[i], cfg.className.activeParent);
       }
       var index = cfg.selected.indexOf(item);
       cfg.selected.splice(index, 1);
@@ -119,7 +119,7 @@ finder.itemSelected = function itemSelected(cfg, emitter, value) {
     } else {
       _.addClass(itemEl, cfg.className.selected);
       for (var i = 0; i < allActiveEls.length; ++i) {
-        _.addClass(allActiveEls[i], cfg.className.parentActive);
+        _.addClass(allActiveEls[i], cfg.className.activeParent);
       }
       cfg.selected.push(item);
       selected = true;
