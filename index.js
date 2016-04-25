@@ -42,7 +42,8 @@ function finder(container, data, options) {
   var cfg = extend(defaults, {
     container: container,
     emitter: emitter,
-    selected: []
+    selected: [],
+    parentSelected: [],
   }, options);
 
   // xtend doesn't deep merge
@@ -112,6 +113,8 @@ finder.itemSelected = function itemSelected(cfg, emitter, value) {
       _.removeClass(itemEl, cfg.className.selected);
       for (var i = 0; i < allActiveEls.length; ++i) {
         _.removeClass(allActiveEls[i], cfg.className.activeParent);
+        var index = cfg.parentSelected.indexOf(allActiveEls[i]);
+        if (index !== -1) cfg.selected.splice(index, 1);
       }
       var index = cfg.selected.indexOf(item);
       cfg.selected.splice(index, 1);
@@ -120,6 +123,7 @@ finder.itemSelected = function itemSelected(cfg, emitter, value) {
       _.addClass(itemEl, cfg.className.selected);
       for (var i = 0; i < allActiveEls.length; ++i) {
         _.addClass(allActiveEls[i], cfg.className.activeParent);
+        cfg.parentSelected.push(allActiveEls[i]);
       }
       cfg.selected.push(item);
       selected = true;
