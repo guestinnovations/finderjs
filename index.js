@@ -112,9 +112,15 @@ finder.itemSelected = function itemSelected(cfg, emitter, value) {
     if (_.hasClass(itemEl, cfg.className.selected)) {
       _.removeClass(itemEl, cfg.className.selected);
       for (var i = 0; i < allActiveEls.length; ++i) {
-        _.removeClass(allActiveEls[i], cfg.className.activeParent);
-        var index = cfg.parentSelected.indexOf(allActiveEls[i]._item);
-        if (index !== -1) cfg.parentSelected.splice(index, 1);
+        var pitem = allActiveEls[i]._item;
+        var ids = pitem.items.map(function(a) { return a.id.toString().split('_')[0]; });
+        $.each(ids, function() {
+          if (cfg.selected.indexOf(this) !== -1) {
+            _.removeClass(allActiveEls[i], cfg.className.activeParent);
+            var index = cfg.parentSelected.indexOf(allActiveEls[i]._item);
+            if (index !== -1) cfg.parentSelected.splice(index, 1);
+          }
+        });
       }
       var index = cfg.selected.indexOf(item);
       if (index !== -1) cfg.selected.splice(index, 1);
