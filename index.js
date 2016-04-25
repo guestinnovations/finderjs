@@ -96,13 +96,11 @@ finder.itemSelected = function itemSelected(cfg, emitter, value) {
   if (activeEls.length) {
     _.removeClass(activeEls[0], cfg.className.active);
   }
-  // _.addClass(itemEl, cfg.className.active);
   _.nextSiblings(col).map(_.remove);
 
   if (data) {
+    _.addClass(itemEl, cfg.className.active);
     finder.createColumn(data, cfg, emitter, item);
-  } else if (item.url) {
-    document.location.href = item.url;
   } else {
     emitter.emit('leaf-selected', item, itemEl);
   }
