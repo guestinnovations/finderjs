@@ -363,7 +363,7 @@ finder.createItem = function createItem(cfg, item) {
     a.href = item.url;
     liClassNames.push(cfg.className.url);
   }
-  if (cfg.selected.indexOf(item) !== -1) {
+  if (cfg.selected.map(function(a) {return a.id}).indexOf(item.id) !== -1) {
     liClassNames.push(cfg.className.selected);
   }
   // if (cfg.parentSelected.indexOf(item) !== -1) {
