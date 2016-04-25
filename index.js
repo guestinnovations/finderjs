@@ -114,10 +114,10 @@ finder.itemSelected = function itemSelected(cfg, emitter, value) {
       for (var i = 0; i < allActiveEls.length; ++i) {
         _.removeClass(allActiveEls[i], cfg.className.activeParent);
         var index = cfg.parentSelected.indexOf(allActiveEls[i]._item);
-        if (index !== -1) cfg.selected.splice(index, 1);
+        if (index !== -1) cfg.parentSelected.splice(index, 1);
       }
       var index = cfg.selected.indexOf(item);
-      cfg.selected.splice(index, 1);
+      if (index !== -1) cfg.selected.splice(index, 1);
       selected = false;
     } else {
       _.addClass(itemEl, cfg.className.selected);
