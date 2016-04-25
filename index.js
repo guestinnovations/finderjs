@@ -113,11 +113,11 @@ finder.itemSelected = function itemSelected(cfg, emitter, value) {
       // var item;
       // $.each(elements, function() {
       for (var i = 0; i < elements.length; ++i) {
-        if (cfg.selected.indexOf(elements[i]._item) !== -1) {
+        if (cfg.selected.indexOf(elements[i]) !== -1) {
           remove = false;
           return false;
-        } else if ('items' in elements[i]._item) {
-          remove = canRemove(elements[i]._item.items, remove);
+        } else if ('items' in elements[i]) {
+          remove = canRemove(elements[i].items, remove);
         }
       };
       return remove;
