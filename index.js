@@ -127,10 +127,10 @@ finder.itemSelected = function itemSelected(cfg, emitter, value) {
       _.removeClass(itemEl, cfg.className.selected);
 
 
-      for (var i = 0; i < activeEls.length; ++i)  {
-        var remove = canRemove(activeEls[i]._item.items, true);
+      for (var i = 0; i < allActiveEls.length; ++i)  {
+        var remove = canRemove(allActiveEls[i]._item.items, true);
         if (remove) {
-          _.addClass(activeEls[i], cfg.className.selected);
+          _.addClass(allActiveEls[i], cfg.className.selected);
         }
       };
       var index = cfg.selected.indexOf(item);
