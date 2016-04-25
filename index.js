@@ -97,27 +97,6 @@ finder.itemSelected = function itemSelected(cfg, emitter, value) {
   var activeEls = col.getElementsByClassName(cfg.className.active);
   var selected;
 
-  var isSelected = function(items, key) {
-    var selected = false;
-    for (var i = 0; i < items || [].length; ++i) {
-      var id = this.item.id.toString().split('_')[0];
-      if (id == key) {
-        selected = true;
-      } else if ('items' in this) {
-        isSelected(this, key);
-      }
-    }
-    return selected;
-  }
-
-  var parentSelected = isSelected(item.items, item.id);
-
-  if (parentSelected) {
-    _.addClass(itemEl, cfg.className.activeParent);
-  } else {
-    _.removeClass(itemEl, cfg.className.activeParent);
-  }
-
   if (activeEls.length) {
     _.removeClass(activeEls[0], cfg.className.active);
   }
@@ -130,11 +109,13 @@ finder.itemSelected = function itemSelected(cfg, emitter, value) {
 
     if (_.hasClass(itemEl, cfg.className.selected)) {
       _.removeClass(itemEl, cfg.className.selected);
+      _.removeClass(activeEls[0], cfg.className.parentActive);
       var index = cfg.selected.indexOf(item);
       cfg.selected.splice(index, 1);
       selected = false;
     } else {
       _.addClass(itemEl, cfg.className.selected);
+      _.addClass(activeEls[0], cfg.className.parentActive);
       cfg.selected.push(item);
       selected = true;
     }
