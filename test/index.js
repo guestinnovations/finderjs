@@ -46,6 +46,7 @@ test('[finder] createColumn', function test(t) {
     className: {
       col: 'fjs-col',
       item: 'fjs-item',
+      activeParent: 'fjs-active-parent',
       list: 'fjs-list'
     }
   };
@@ -74,6 +75,7 @@ test('[finder] createList', function test(t) {
     selected: [],
     className: {
       list: 'fjs-list',
+      activeParent: 'fjs-active-parent',
       item: 'fjs-item'
     }
   };
@@ -98,6 +100,7 @@ test('[finder] createItem', function test(t) {
     selected: [],
     className: {
       item: 'fjs-item',
+      activeParent: 'fjs-active-parent',
       children: 'fjs-children'
     }
   };
@@ -127,6 +130,7 @@ test('[finder] itemSelected', function test(t) {
       list: 'fjs-list',
       col: 'fjs-col',
       active: 'fjs-active',
+      activeParent: 'fjs-active-parent',
       selected: 'fjs-selected',
     }
   };
@@ -175,6 +179,7 @@ test('[finder] clickEvent', function test(t) {
     className: {
       item: 'fjs-item',
       col: 'fjs-col',
+      activeParent: 'fjs-active-parent',
       active: 'fjs-active'
     }
   };
@@ -214,6 +219,7 @@ test('[finder] findLastActive', function test(t) {
       item: 'fjs-item',
       list: 'fjs-list',
       col: 'fjs-col',
+      activeParent: 'fjs-active-parent',
       active: 'fjs-active'
     }
   };
@@ -241,6 +247,7 @@ test('[finder] navigate', function test(t) {
       item: 'fjs-item',
       list: 'fjs-list',
       col: 'fjs-col',
+      activeParent: 'fjs-active-parent',
       active: 'fjs-active'
     }
   };

@@ -20,6 +20,7 @@ var defaults = {
     item: 'fjs-item',
     active: 'fjs-active',
     selected: 'fjs-selected',
+    activeParent: 'fjs-active-parent',
     children: 'fjs-has-children',
     url: 'fjs-url',
     itemPrepend: 'fjs-item-prepend',
@@ -95,6 +96,27 @@ finder.itemSelected = function itemSelected(cfg, emitter, value) {
   var data = item[cfg.childKey] || cfg.data;
   var activeEls = col.getElementsByClassName(cfg.className.active);
   var selected;
+
+  var isSelected = function(items, key) {
+    var selected = false;
+    for (var i = 0; i < items || [].length; ++i) {
+      var id = this.item.id.toString().split('_')[0];
+      if (id == key) {
+        selected = true;
+      } else if ('items' in this) {
+        isSelected(this, key);
+      }
+    }
+    return selected;
+  }
+
+  var parentSelected = isSelected(item.items, item.id);
+
+  if (parentSelected) {
+    _.addClass(itemEl, cfg.className.activeParent);
+  } else {
+    _.removeClass(itemEl, cfg.className.activeParent);
+  }
 
   if (activeEls.length) {
     _.removeClass(activeEls[0], cfg.className.active);
