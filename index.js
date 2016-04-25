@@ -94,6 +94,7 @@ finder.itemSelected = function itemSelected(cfg, emitter, value) {
   var col = value.col;
   var data = item[cfg.childKey] || cfg.data;
   var activeEls = col.getElementsByClassName(cfg.className.active);
+  var selected;
 
   if (activeEls.length) {
     _.removeClass(activeEls[0], cfg.className.active);
@@ -109,12 +110,14 @@ finder.itemSelected = function itemSelected(cfg, emitter, value) {
       _.removeClass(itemEl, cfg.className.selected);
       var index = cfg.selected.indexOf(item);
       cfg.selected.splice(index, 1);
+      selected = false;
     } else {
       _.addClass(itemEl, cfg.className.selected);
       cfg.selected.push(item);
+      selected = true;
     }
 
-    emitter.emit('leaf-selected', item, itemEl);
+    emitter.emit('leaf-selected', item, itemEl, selected);
   }
 };
 
