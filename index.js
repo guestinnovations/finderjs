@@ -345,6 +345,9 @@ finder.createItem = function createItem(cfg, item) {
   if (cfg.selected.indexOf(item) !== -1) {
     liClassNames.push(cfg.className.selected);
   }
+  if (cfg.parentSelected.indexOf(item) !== -1) {
+    liClassNames.push(cfg.className.activeParent);
+  }
   if (item.className) {
     liClassNames.push(item.className);
   }
