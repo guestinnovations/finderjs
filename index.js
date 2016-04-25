@@ -114,7 +114,7 @@ finder.itemSelected = function itemSelected(cfg, emitter, value) {
       // $.each(elements, function() {
       for (var i = 0; i < elements.length; ++i) {
         if (cfg.selected.indexOf(elements[i]) !== -1) {
-          remove = false;
+          remove = true;
           return false;
         } else if ('items' in elements[i]) {
           remove = canRemove(elements[i].items, remove);
@@ -128,7 +128,7 @@ finder.itemSelected = function itemSelected(cfg, emitter, value) {
 
 
       for (var i = 0; i < allActiveEls.length; ++i)  {
-        var remove = canRemove(allActiveEls[i]._item.items, true);
+        var remove = canRemove(allActiveEls[i]._item.items, false);
         if (remove) {
           _.addClass(allActiveEls[i], cfg.className.selected);
         }
