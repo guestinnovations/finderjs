@@ -97,6 +97,7 @@ finder.itemSelected = function itemSelected(cfg, emitter, value) {
   var data = item[cfg.childKey] || cfg.data;
   var activeEls = col.getElementsByClassName(cfg.className.active);
   var allActiveEls = document.getElementsByClassName(cfg.className.active);
+  var selectedEls = col.getElementsByClassName(cfg.className.selected);
   var selected;
 
   if (activeEls.length) {
@@ -109,39 +110,42 @@ finder.itemSelected = function itemSelected(cfg, emitter, value) {
     finder.createColumn(data, cfg, emitter, item);
   } else {
 
-    var canRemove = function(elements, remove) {
-      // var item;
-      // $.each(elements, function() {
-      for (var i = 0; i < elements.length; ++i) {
-        if (cfg.selected.indexOf(elements[i]) !== -1) {
-          remove = true;
-          return false;
-        } else if ('items' in elements[i]) {
-          remove = canRemove(elements[i].items, remove);
-        }
-      };
-      return remove;
-    };
+    // var canRemove = function(elements, remove) {
+    //   // var item;
+    //   // $.each(elements, function() {
+    //   for (var i = 0; i < elements.length; ++i) {
+    //     if (cfg.selected.indexOf(elements[i]) !== -1) {
+    //       remove = true;
+    //       return false;
+    //     } else if ('items' in elements[i]) {
+    //       remove = canRemove(elements[i].items, remove);
+    //     }
+    //   };
+    //   return remove;
+    // };
 
     if (_.hasClass(itemEl, cfg.className.selected)) {
       _.removeClass(itemEl, cfg.className.selected);
 
+      // if (selectedEls.length === 0) {
+        
+      // }
 
-      for (var i = 0; i < allActiveEls.length; ++i)  {
-        var remove = canRemove(allActiveEls[i]._item.items, false);
-        if (remove) {
-          _.addClass(allActiveEls[i], cfg.className.selected);
-        }
-      };
+      // for (var i = 0; i < allActiveEls.length; ++i)  {
+      //   var remove = canRemove(allActiveEls[i]._item.items, false);
+      //   if (remove) {
+      //     _.addClass(allActiveEls[i], cfg.className.selected);
+      //   }
+      // };
       var index = cfg.selected.indexOf(item);
       if (index !== -1) cfg.selected.splice(index, 1);
       selected = false;
     } else {
       _.addClass(itemEl, cfg.className.selected);
-      for (var i = 0; i < allActiveEls.length; ++i) {
-        _.addClass(allActiveEls[i], cfg.className.activeParent);
-        cfg.parentSelected.push(allActiveEls[i]._item);
-      }
+      // for (var i = 0; i < allActiveEls.length; ++i) {
+      //   _.addClass(allActiveEls[i], cfg.className.activeParent);
+      //   cfg.parentSelected.push(allActiveEls[i]._item);
+      // }
       cfg.selected.push(item);
       selected = true;
     }
@@ -362,9 +366,9 @@ finder.createItem = function createItem(cfg, item) {
   if (cfg.selected.indexOf(item) !== -1) {
     liClassNames.push(cfg.className.selected);
   }
-  if (cfg.parentSelected.indexOf(item) !== -1) {
-    liClassNames.push(cfg.className.activeParent);
-  }
+  // if (cfg.parentSelected.indexOf(item) !== -1) {
+  //   liClassNames.push(cfg.className.activeParent);
+  // }
   if (item.className) {
     liClassNames.push(item.className);
   }
