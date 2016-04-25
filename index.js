@@ -19,6 +19,7 @@ var defaults = {
     list: 'fjs-list',
     item: 'fjs-item',
     active: 'fjs-active',
+    selected: 'fjs-selected',
     children: 'fjs-has-children',
     url: 'fjs-url',
     itemPrepend: 'fjs-item-prepend',
@@ -102,6 +103,13 @@ finder.itemSelected = function itemSelected(cfg, emitter, value) {
     _.addClass(itemEl, cfg.className.active);
     finder.createColumn(data, cfg, emitter, item);
   } else {
+
+    if (_.hasClass(itemEl, cfg.className.selected)) {
+      _.removeClass(itemEl, cfg.className.selected);
+    } else {
+      _.addClass(itemEl, cfg.className.selected);
+    }
+
     emitter.emit('leaf-selected', item, itemEl);
   }
 };

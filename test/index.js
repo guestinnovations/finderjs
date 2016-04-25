@@ -122,7 +122,8 @@ test('[finder] itemSelected', function test(t) {
       item: 'fjs-item',
       list: 'fjs-list',
       col: 'fjs-col',
-      active: 'fjs-active'
+      active: 'fjs-active',
+      selected: 'fjs-selected',
     }
   };
   var emitter = new EventEmitter();
