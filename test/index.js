@@ -42,6 +42,7 @@ test('[finder] createColumn', function test(t) {
     label: 'B: Choice 1'
   }];
   var cfg = {
+    selected: [],
     className: {
       col: 'fjs-col',
       item: 'fjs-item',
@@ -70,6 +71,7 @@ test('[finder] createList', function test(t) {
     label: 'B: Choice 1'
   }];
   var cfg = {
+    selected: [],
     className: {
       list: 'fjs-list',
       item: 'fjs-item'
@@ -93,6 +95,7 @@ test('[finder] createItem', function test(t) {
     className: 'optional'
   };
   var cfg = {
+    selected: [],
     className: {
       item: 'fjs-item',
       children: 'fjs-children'
@@ -118,6 +121,7 @@ test('[finder] itemSelected', function test(t) {
   var cfg = {
     childKey: 'children',
     labelKey: 'label',
+    selected: [],
     className: {
       item: 'fjs-item',
       list: 'fjs-list',

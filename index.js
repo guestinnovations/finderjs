@@ -40,7 +40,8 @@ function finder(container, data, options) {
   var emitter = new EventEmitter();
   var cfg = extend(defaults, {
     container: container,
-    emitter: emitter
+    emitter: emitter,
+    selected: []
   }, options);
 
   // xtend doesn't deep merge
@@ -106,8 +107,11 @@ finder.itemSelected = function itemSelected(cfg, emitter, value) {
 
     if (_.hasClass(itemEl, cfg.className.selected)) {
       _.removeClass(itemEl, cfg.className.selected);
+      var index = cfg.selected.indexOf(item);
+      cfg.selected.splice(index, 1);
     } else {
       _.addClass(itemEl, cfg.className.selected);
+      cfg.selected.push(item);
     }
 
     emitter.emit('leaf-selected', item, itemEl);
@@ -255,7 +259,7 @@ finder.createColumn = function createColumn(data, cfg, emitter, parent) {
     div.appendChild(list);
     _.addClass(div, cfg.className.col);
 
-    emitter.emit('create-column', div);
+    emitter.emit('create-column', div, data);
   } else {
     throw new Error('Unknown data type');
   }
@@ -322,6 +326,9 @@ finder.createItem = function createItem(cfg, item) {
   if (item.url) {
     a.href = item.url;
     liClassNames.push(cfg.className.url);
+  }
+  if (cfg.selected.indexOf(item) !== -1) {
+    liClassNames.push(cfg.className.selected);
   }
   if (item.className) {
     liClassNames.push(item.className);
