@@ -109,17 +109,32 @@ finder.itemSelected = function itemSelected(cfg, emitter, value) {
     finder.createColumn(data, cfg, emitter, item);
   } else {
 
+    var findItem = function(el) {
+      // var item;
+      $.each(el, function() {
+        if (cfg.selected.indexOf(this._item) == -1) {
+          _.removeClass(this, cfg.className.activeParent);
+        } else if (cfg.selected.indexOf(this._item) !== -1) {
+          _.addClass(this, cfg.className.activeParent);
+        } else if ('items' in el._item) {
+          findItem(el._item.items);
+        }
+      });
+      // return item;
+    };
+
     if (_.hasClass(itemEl, cfg.className.selected)) {
       _.removeClass(itemEl, cfg.className.selected);
-      for (var i = 0; i < allActiveEls.length; ++i) {
-        $.each(allActiveEls[i]._item.items, function() {
-          if (cfg.selected.indexOf(this) !== -1) {
-            _.removeClass(allActiveEls[i], cfg.className.activeParent);
-            var index = cfg.parentSelected.indexOf(allActiveEls[i]._item);
-            if (index !== -1) cfg.parentSelected.splice(index, 1);
-          }
-        });
-      }
+      // for (var i = 0; i < allActiveEls.length; ++i) {
+      //   $.each(allActiveEls[i]._item.items, function() {
+      //     if (cfg.selected.indexOf(this) !== -1) {
+      //       _.removeClass(allActiveEls[i], cfg.className.activeParent);
+      //       var index = cfg.parentSelected.indexOf(allActiveEls[i]._item);
+      //       if (index !== -1) cfg.parentSelected.splice(index, 1);
+      //     }
+      //   });
+      // }
+      findItem(allActiveEls);
       var index = cfg.selected.indexOf(item);
       if (index !== -1) cfg.selected.splice(index, 1);
       selected = false;
