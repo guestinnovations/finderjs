@@ -55,12 +55,21 @@ function finder(container, data, options) {
   }
 
   // dom events
+  container.removeEventListener(
+    'click', finder.clickEvent.bind(null, cfg, emitter));
+  container.removeEventListener(
+    'keydown', finder.keydownEvent.bind(null, container, cfg, emitter));
   container.addEventListener(
     'click', finder.clickEvent.bind(null, cfg, emitter));
   container.addEventListener(
     'keydown', finder.keydownEvent.bind(null, container, cfg, emitter));
 
   // internal events
+  emitter.off('item-selected', finder.itemSelected.bind(null, cfg, emitter));
+  emitter.off(
+    'create-column', finder.addColumn.bind(null, container, cfg, emitter));
+  emitter.off(
+    'navigate', finder.navigate.bind(null, cfg, emitter));
   emitter.on('item-selected', finder.itemSelected.bind(null, cfg, emitter));
   emitter.on(
     'create-column', finder.addColumn.bind(null, container, cfg, emitter));
