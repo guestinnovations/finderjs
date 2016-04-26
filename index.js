@@ -357,6 +357,7 @@ finder.createItemContent = function createItemContent(cfg, item) {
  * @return {element} list item
  */
 finder.createItem = function createItem(cfg, item) {
+  if (item.type == 'bundle') return;
   var frag = document.createDocumentFragment();
   var liClassNames = [cfg.className.item];
   var li = _.el('li');
