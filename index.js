@@ -317,7 +317,7 @@ finder.createColumn = function createColumn(data, cfg, emitter, parent) {
  */
 finder.createList = function createList(data, cfg) {
   var ul = _.el('ul');
-  var items = data.map(finder.createItem.bind(null, cfg));
+  var items = data.map(function (a) {if (a.type != 'bundle') finder.createItem.bind(null, cfg)});
   var docFrag;
 
   docFrag = items.reduce(function each(docFrag, curr) {
@@ -357,7 +357,6 @@ finder.createItemContent = function createItemContent(cfg, item) {
  * @return {element} list item
  */
 finder.createItem = function createItem(cfg, item) {
-  if (item.type == 'bundle') return;
   var frag = document.createDocumentFragment();
   var liClassNames = [cfg.className.item];
   var li = _.el('li');
