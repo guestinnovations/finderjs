@@ -317,7 +317,8 @@ finder.createColumn = function createColumn(data, cfg, emitter, parent) {
  */
 finder.createList = function createList(data, cfg) {
   var ul = _.el('ul');
-  var items = data.map(function (a) {if (a.type != 'bundle') finder.createItem.bind(null, cfg)});
+  var data = data.filter(function(a) { return a.type != 'bundle'});
+  var items = data.map(finder.createItem.bind(null, cfg));
   var docFrag;
 
   docFrag = items.reduce(function each(docFrag, curr) {
